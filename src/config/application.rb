@@ -16,7 +16,10 @@ module App
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    I18n.available_locales = %i(ja en)
+    I18n.enforce_available_locales = true
+    I18n.default_locale = :ja
+    config.time_zone = "Asia/Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

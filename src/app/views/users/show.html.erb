@@ -18,7 +18,10 @@
 <%l = @posts.length; @posts.each_with_index{|post,i|
 submitter = User.find_by(id: post.submitter)
 sname = (submitter != nil) ? submitter.fullname : 'Anonymous'%>
-<p><%=(l-i).to_s + ":" + sname+','+ post.created_at.to_s%><br />
-<%=post.body%></p>
+<p><%=(l-i).to_s+' : ' %>
+<%= (submitter != nil) ? (link_to sname, user_path(submitter)) : sname%>
+<%= post.created_at.to_s %>
+<blockquote><%=simple_format(h(post.body))%>
+</blockquote></p>
 <%}%>
 <%end%>

@@ -7,3 +7,18 @@
 <%}%>
 </ul>
 <%end%>
+
+<%= form_with model: Post.new do |f|%>
+<%=f.text_area :body, placeholder: "Add your comment"%><br />
+<%= f.hidden_field :id, {value: @user.id} %>
+<%= f.submit 'submit'%>
+<%end%>
+
+<% if @posts != nil%>
+<%l = @posts.length; @posts.each_with_index{|post,i|
+submitter = User.find_by(id: post.submitter)
+sname = (submitter != nil) ? submitter.fullname : 'Anonymous'%>
+<p><%=(l-i).to_s + ":" + sname+','+ post.created_at.to_s%><br />
+<%=post.body%></p>
+<%}%>
+<%end%>

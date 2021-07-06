@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>dialog-app</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,17 +12,45 @@
 
   <body>
   <header>
-  <nav>
+  <nav class="navbar navbar-dark bg-dark">
   <% if user_signed_in?%>
-  <%= link_to 'logout', destroy_user_session_path, method: :delete%>
+ <div class="btn btn-success">
+ <%= link_to 'home', user_path(current_user.id),class:'text-white'%>
+ </div>
+ <div class="text-white">
+ <%= current_user.fullname%>
+ </div>
+ <div class="btn btn-danger">
+  <%= link_to 'logout', destroy_user_session_path, method: :delete, class:'text-white'%></div>
   <%else%>
-  <%= link_to "sign up", new_user_registration_path %>
-  <%= link_to "login", new_user_session_path %>
+  <div class="btn btn-primary">
+  <%= link_to "login", new_user_session_path,class:'text-white'%>
+  </div>
+  <div class="text-white">
+  dialog-app
+  </div>
+  <div class="btn btn-success">
+  <%= link_to "sign up", new_user_registration_path,class:"text-white" %>
+  </div>
+
   <%end%>
   </nav>
   </header>
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+  <% if notice %>
+  <div class="alert alert-info alert-dismissible fade show" role="alert"><%= notice %>
+  <button type = "button" class="close" data-dismiss="alert" aria-label="dismiss"><span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <% end%>
+
+  <% if alert %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert"><%= alert %>
+  <button type = "button" class="close" data-dismiss="alert" aria-label="dismiss"><span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+    <% end%>
+  <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>

@@ -6,6 +6,7 @@ class PostsController < ApplicationController
       flash[:alert] = 'null comment is not allowed'
     else
       if user.posts.create(body: p[:body], submitter: current_user.id)
+        user.touch if current_user.role != 'teacher'
         flash[:notice] = 'post was created successfully'
       else
       flash[:alert] = 'something wrong'

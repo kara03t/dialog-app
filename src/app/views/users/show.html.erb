@@ -2,8 +2,10 @@
 
 <% if @students != nil%>
 <p>
-<%@students.each {|st|%>
-<%= link_to st.fullname, user_path(st.id), class: 'btn btn-light'%>
+<%@students.each {|st|
+color = @updated_users.include?(st.id) ? 'btn btn-warning' : 'btn btn-light'
+%>
+<%= link_to st.fullname, user_path(st.id), class: color %>
 <%}%>
 </p>
 <%end%>

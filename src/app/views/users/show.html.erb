@@ -31,4 +31,7 @@ sname = (submitter != nil) ? submitter.fullname : 'Anonymous'%>
 <%=simple_format(h(post.body))%></div>
 </div>
 <%}%>
+<br/>
+<%=paginate @posts%>
+<br/>
 <%end%>

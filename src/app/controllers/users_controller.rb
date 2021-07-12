@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = Post.where(user_id: @user.id).order('created_at desc')
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
 
     visit = current_user.visits.find_by(visitee: @user.id)
     if(visit != nil)

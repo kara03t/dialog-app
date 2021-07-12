@@ -10,9 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+     super
+     teachers = User.where(role: 'teacher')
+     teachers.each {|t|
+      t.visits << Visit.create(visitee: current_user.id)
+      
+   }
+   end
 
   # GET /resource/edit
   # def edit

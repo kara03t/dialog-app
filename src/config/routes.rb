@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :posts
+      resources :visits
+
+      root to: "users#index"
+    end
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
